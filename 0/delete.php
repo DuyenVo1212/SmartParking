@@ -3,7 +3,6 @@ include('../inc/connect.php');
 
 
 if (isset($_POST['delete'])){
-
 $id=$_POST['selector'];
 
 $N = count($id);

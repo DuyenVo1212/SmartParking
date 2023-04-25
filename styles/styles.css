@@ -465,7 +465,8 @@ vhead {
   color: white;
 }
 .profile {
-  width: 450px;
+  margin: 0 auto;
+  max-width: 500px;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 6px;
   box-shadow: 5px 0px 5px #888888;
@@ -960,19 +961,6 @@ table.viewtb tr td:nth-child() {
   line-height: 1.5;
   text-align: justify;
   color: #444;
-}
-
-.note-content li {
-  animation: typing 5s steps(20, end) forwards;
-}
-
-@keyframes typing {
-  from {
-    width: 20%;
-  }
-  to {
-    width: 100%;
-  }
 }
 
 /* Style for Parking Lot Status page */

@@ -117,7 +117,7 @@
                     fromInput.addEventListener("input", calculateFees);
                     toInput.addEventListener("input", calculateFees);
                     </script>
-                    <label>Note: Parking Fees: 5000VND/hour</label>
+                    <label>Note: Parking Fees: 100VND/second</label>
                 </fieldset>
                 <footer>
                     <input type="submit" class="btnLogin" value="Booking now" tabindex="4">

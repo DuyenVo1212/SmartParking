@@ -21,7 +21,7 @@
         background-position: center;
         background-repeat: no-repeat;
         background-size: auto 100%;
-        transaction: all .8s cubic-bezier(.25, .4, .45, .1.4);
+        transition: all .8s cubic-bezier(.25, .4, .45, .1.4);
     }
 
     .galeri>div:hover {
@@ -59,15 +59,6 @@
             </section>
 
         </section>
-
-
-
-
-
-
-
-
-
         <?php
 			include('inc/footer.php');
 	?>

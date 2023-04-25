@@ -1,5 +1,5 @@
 <?php 
-     $connection = mysqli_connect("localhost", "root", "", "cpms");
+     $connection = mysqli_connect("localhost", "admin", "123", "cpms");
     $query = "select * from zones where status = 'RESERVED' and timebegin < NOW() - INTERVAL 3 MINUTE";
     $rs = mysqli_query($connection, $query);
     $rows=mysqli_fetch_assoc($rs);

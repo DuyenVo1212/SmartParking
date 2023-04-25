@@ -7,6 +7,7 @@
     <?php
 			include('inc/head.php');
 	?>
+
 </head>
 
 <body>
@@ -16,17 +17,11 @@
 			include('inc/connect.php');
 						
 	?>
-
         <section id="content">
             <div class="profile">
                 <div class="avatar">
                     <span>Change Avatar</span>
-
                     <input type="file" accept="image/*" style="display:none" onchange="previewImage(event)">
-
-
-                </div>
-                <div class="edit tooltip" title="Edit Your Profile"><img src="src/edit.png" />
                 </div>
                 <?php
 			
@@ -39,8 +34,8 @@
 		?>
                 <div class="dt name">NAME: <span><?php  echo $rows['name'];  ?></span></div>
                 <div class="dt phone">PHONE: <span><?php  echo $rows['phone'];  ?></span></div>
-                <button style="display:none">Save Changes</button>
-                <div id="status"></div>
+                <div class="dt phone">EMAIL: <span><?php  echo $rows['email'];  ?></span></div>
+
                 <?php  } ?>
             </div>
         </section>

@@ -57,7 +57,6 @@
                                 <td style="width:180px text-align:left;"><?php echo $row['msg'] ?></td>
                                 <td><?php echo $row['msgdate'] ?></td>
 
-
                             </tr>
 
                             <?php } ?>

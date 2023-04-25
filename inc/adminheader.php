@@ -7,15 +7,14 @@ if (session_status() == PHP_SESSION_NONE) {
 				
 				} 
 			else
-			{
-				//header("Location: index.php");
-			}	//GIAO DIỆN ADMIN
+			{				
+			}	
 }
  ?>
 
 	<header>
 	    <div id="logo">
-		<img src="../src/logoSP-rs.png" style="position:absolute; top: 0; width: 190px;" />
+	        <img src="../src/logoSP-rs.png" style="position:absolute; top: 0; width: 190px;" />
 	    </div>
 
 	    <?php 
@@ -49,8 +48,6 @@ if (session_status() == PHP_SESSION_NONE) {
 	    <?php	
 			}  
 			?>
-
-
 	    <nav>
 	        <ul>
 	            <li class="hor"><a href="index.php">Users</a></li>

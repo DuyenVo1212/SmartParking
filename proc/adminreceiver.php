@@ -1,18 +1,25 @@
 <?php
-    mysql_connect("localhost", "admin", "123") or die(mysql_error());
-    mysql_select_db("cpms") or die(mysql_error());
-   $name = $_POST['name']; //get posted data
-    $phone = $_POST['phone'];  //escape string 
-	$idno = $_POST['idno'];  //escape string 
-	$plate = $_POST['plate'];  //escape string 
+    $conn = mysqli_connect("localhost", "admin", "123", "cpms");
 
-    $sql = "UPDATE users SET name = '$name', id_no = '$idno', plate_no = '$plate' WHERE phone = '$phone'";
-       // $sql = "UPDATE content SET text = '$content' WHERE element_id = '2' ";
-
-
-    if (mysql_query($sql))
-    {
-        echo 1;
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
     }
 
+    $name = $_POST['name'];
+    $phone = $_POST['phone'];
+    $idno = $_POST['idno'];
+    $plate = $_POST['plate'];
+
+    $sql = "UPDATE users SET name=?, id_no=?, plate_no=? WHERE phone=?";
+
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "ssss", $name, $idno, $plate, $phone);
+
+    if (mysqli_stmt_execute($stmt)) {
+        echo "1";
+    } else {
+        echo "Error updating record: " . mysqli_error($conn);
+    }
+
+    mysqli_close($conn);
 ?>

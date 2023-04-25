@@ -4,8 +4,5 @@
 <link rel="stylesheet" href="../styles/adminpager.css" type="text/css">
 <script src="../js/jquery.js"></script>
 <script src="../js/adminmyjs.js"></script>
-
-
-
 <script type="text/javascript" charset="utf-8" language="javascript" src="../js/jquery.dataTables.js"></script>
 <script type="text/javascript" charset="utf-8" language="javascript" src="../js/DT_bootstrap.js"></script>

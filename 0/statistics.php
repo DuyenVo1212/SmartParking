@@ -56,15 +56,15 @@
                             style="padding: 3.8px 5px;border:1px solid black;margin-top: -11px;"><?php echo " $month";echo "/"; echo "$year ";?></span>
                     </form>
                     <hr>
-                    <h5 style="width:640px; margin: auto;">Thống kê số lượng đặt trước theo tháng
-                        <?php echo " $month";echo "/"; echo "$year ";?> là :<?php echo " $total "; ?> lượt đặt/tháng.
+                    <h5 style="width:640px; margin: auto;">Statistics of the number of reservations by
+                        <?php echo " $month";echo "/"; echo "$year ";?> is :<?php echo " $total "; ?> bookings/month.
                     </h5>
                     <hr>
                     <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered"
                         id="example">
                         <thead>
                             <tr>
-                                <th style="width:120px;">Year-Month</th>
+                                <th style="width:120px;">Booking Date</th>
                                 <th style="width:90px;">Slot</th>
                                 <th style="width:90px;">Plate</th>
                                 <th style="width:90px;">Phone</th>

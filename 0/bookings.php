@@ -84,9 +84,7 @@
                             <?php } ?>
                         </tbody>
                     </table>
-                    <!-- <input type="submit" class="btn btn-danger" value="Delete" name="delete"> -->
 
-                    <!-- </form> -->
                 </div>
             </div>
         </section>

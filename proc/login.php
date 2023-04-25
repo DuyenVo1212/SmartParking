@@ -10,7 +10,7 @@ if (isset($_POST['Submit'])) {
 	$phone=$_POST['phone'];
 	$password=$_POST['password'];
 
-	$connection = mysqli_connect("localhost", "root", "", "cpms");
+	$connection = mysqli_connect("localhost", "admin", "123", "cpms");
 
 	
 	$query = mysqli_query($connection, "select * from users where password='$password' AND phone='$phone'");
