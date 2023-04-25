@@ -422,7 +422,7 @@ vhead {
 .profile button {
   padding: 6px;
   border-radius: 3px;
-  background: purple;
+  background: #2c3e50;
   border: solid 1px black;
   margin-top: 25px;
   margin-left: 172px;
@@ -433,7 +433,7 @@ vhead {
 .avator {
   width: 150px;
   height: 150px;
-  background: #e699ff;
+  background: #dae6f1;
   border-radius: 3px;
   border: gray;
   display: inline-block;
@@ -448,7 +448,7 @@ vhead {
   display: none;
 }
 .avator:hover span {
-  background: purple;
+  background: #2c3e50;
   display: block;
 }
 .avator span:hover {
@@ -468,12 +468,12 @@ vhead {
 .dt {
   padding: 5px;
   font-size: 18px;
-  border-bottom: solid 2px purple;
+  border-bottom: solid 2px #2c3e50;
 }
 .dt span {
   float: right;
   width: 270px;
-  background: #dd99ff;
+  background: #dae6f1;
   padding: 5px;
   height: 15px;
   border-radius: 5px;
@@ -502,3 +502,4 @@ vhead {
   text-align: center;
   padding-top: 13px;
 }
+

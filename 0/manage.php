@@ -2,11 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>Car Park Management System</title>
+    <title>Manage Admin Accounts</title>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
     <?php
 			include('../inc/adminhead.php');
 	?>
+    <style>
+    .table td,
+    .table th {
+        text-align: center;
+    }
+    </style>
 </head>
 
 <body>
@@ -19,7 +25,7 @@
 
         <section id="content">
             <div>
-                <p class="phead">Manage Admins</p>
+                <p class="phead">Manage Admin Accounts</p>
                 <div style="width:660px;background:white;padding:10px;margin:auto;">
 
                     <form method="post" action="deleteadmin.php">
@@ -32,7 +38,7 @@
                                     <th style="width:30px;">CHK</th>
                                     <th>Name</th>
                                     <th>Phone</th>
-                                    <th style="width:100px;">Password</th>
+                                    <th style="width:180px;">Password</th>
                                     <!--   <th>Id No</th> -->
 
                                 </tr>
@@ -50,8 +56,8 @@
                                     </td>
                                     <td><?php echo $row['name'] ?></td>
                                     <td><?php echo $row['phone'] ?></td>
-                                    <td style="text-align:left;"><?php echo $row['password'] ?></td>
-                                    <!--  <td><?php echo $row['id_no'] ?></td> -->
+                                    <td style="text-align: center;"><?php echo $row['password'] ?></td>
+
 
                                 </tr>
 

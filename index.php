@@ -1,32 +1,32 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
-    <title>Car Parking System</title>
+    <title>Reserve Your Parking Spot Today</title>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
     <?php
 			include('inc/head.php');
 	?>
     <style>
-        .galeri {
-            display: flex;
-            height: 400px;
-            gap: 5px;
-            margin-bottom: 20px;
-        }
+    .galeri {
+        display: flex;
+        height: 400px;
+        gap: 5px;
+        margin-bottom: 20px;
+    }
 
-        .galeri > div {
-            flex: 1;
-            border-radius: 10px;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: auto 100%;
-            transaction: all .8s cubic-bezier(.25, .4, .45, .1.4);
-        }
+    .galeri>div {
+        flex: 1;
+        border-radius: 10px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: auto 100%;
+        transaction: all .8s cubic-bezier(.25, .4, .45, .1.4);
+    }
 
-        .galeri > div:hover {
-            flex: 8;
-        }
+    .galeri>div:hover {
+        flex: 8;
+    }
     </style>
 </head>
 

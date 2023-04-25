@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>Car Park Management System</title>
+    <title>Manage Users Account</title>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
     <?php
 			include('../inc/adminhead.php');
@@ -19,7 +19,7 @@
 
         <section id="content">
             <div>
-                <p class="phead">Users</p>
+                <p class="phead">Manage Users Account</p>
                 <div style="width:600px;background:white;padding:10px;margin:auto;">
 
                     <form method="post" action="delete.php">

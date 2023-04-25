@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>Car Park Management System</title>
+    <title>Manage Parking Bookings</title>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
     <?php
 			include('../inc/adminhead.php');
@@ -19,47 +19,47 @@
 
         <section id="content">
             <div>
-                <p class="phead">Status Slot</p>
+                <p class="phead">View and Manage Parking Reservations</p>
                 <div style="width:660px;background:white;padding:10px;margin:auto;">
 
                     <!-- <form method="post" action="deletebooking.php"> -->
-                        <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered"
-                            id="example">
+                    <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered"
+                        id="example">
 
-                            <thead>
+                        <thead>
 
-                                <tr>
-                                    <th>Slot</th>
-                                    <th style="width:90px;">Plate No</th>
-                                    <th style="width:90px;">Time Begin</th>
-                                    <th style="width:90px;">Time End</th>
-                                    <th style="width:90px;">Time In</th>
-                                    <th style="width:90px;">Time Out</th>
-                                    <th style="width:80px;">Status</th>
-                                    <th style="width:80px;">Payment Status</th>
+                            <tr>
+                                <th>Slot</th>
+                                <th style="width:90px;">Plate No</th>
+                                <th style="width:90px;">Time Begin</th>
+                                <th style="width:90px;">Time End</th>
+                                <th style="width:90px;">Time In</th>
+                                <th style="width:90px;">Time Out</th>
+                                <th style="width:80px;">Status</th>
+                                <th style="width:80px;">Payment Status</th>
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php 
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php 
 							$query=mysqli_query($connect, "select * from zones")or die(mysqli_error($connect));
 							while($row=mysqli_fetch_array($query)){
 							$id=$row['id'];
                             $pays=$row['pays'];
 							?>
 
-                                <tr>
-                                    <td>
-                                        <input name="selector[]" type="checkbox" value="<?php echo $id; ?>">
-                                    </td>
-                                    <td><?php echo $row['slot'] ?></td>
-                                    <td><?php echo $row['plateno'] ?></td>
-                                    <td><?php echo $row['timebegin'] ?></td>
-                                    <td><?php echo $row['timeend'] ?></td>
-                                    <td><?php echo $row['timein'] ?></td>
-                                    <td><?php echo $row['timeout'] ?></td>
-                                    <td><?php echo $row['status'] ?></td>
-                                    <td>
+                            <tr>
+                                <td>
+                                    <input name="selector[]" type="checkbox" value="<?php echo $id; ?>">
+                                </td>
+                                <td><?php echo $row['slot'] ?></td>
+                                <td><?php echo $row['plateno'] ?></td>
+                                <td><?php echo $row['timebegin'] ?></td>
+                                <td><?php echo $row['timeend'] ?></td>
+                                <td><?php echo $row['timein'] ?></td>
+                                <td><?php echo $row['timeout'] ?></td>
+                                <td><?php echo $row['status'] ?></td>
+                                <td>
                                     <?php
                                         if($pays == NULL) {
                                             // function updatepaystatus() {
@@ -78,13 +78,13 @@
                                             echo "paid";
                                         }
                                     ?>
-                                    </td>
-                                </tr>
+                                </td>
+                            </tr>
 
-                                <?php } ?>
-                            </tbody>
-                        </table>
-                        <!-- <input type="submit" class="btn btn-danger" value="Delete" name="delete"> -->
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                    <!-- <input type="submit" class="btn btn-danger" value="Delete" name="delete"> -->
 
                     <!-- </form> -->
                 </div>

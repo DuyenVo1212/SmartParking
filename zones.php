@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Parking Zones</title>
+    <title>Find Available Parking Slots</title>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
     <?php
         include('inc/head.php');

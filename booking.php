@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>Car Park Management System</title>
+    <title>Book Your Parking Spot</title>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
     <?php
 			include('inc/head.php');
@@ -99,25 +99,24 @@
                     <input type="text" name="paynum" placeholder="Card Number" required title="Credit card number"
                         maxlength="14" />
                     <label style="text-align:left;">Paid:</label>
-                    <input type="text" id="paid" name="paid" value="" required 
-                        maxlength="14" readonly />
-                        <script>
-                            const fromInput = document.getElementById("from");
-                            const toInput = document.getElementById("to");
-                            const paidInput = document.getElementById("paid");
+                    <input type="text" id="paid" name="paid" value="" required maxlength="14" readonly />
+                    <script>
+                    const fromInput = document.getElementById("from");
+                    const toInput = document.getElementById("to");
+                    const paidInput = document.getElementById("paid");
 
-                            // Calculate parking fees based on from and to dates
-                            const calculateFees = () => {
-                                const fromDate = new Date(fromInput.value);
-                                const toDate = new Date(toInput.value);
-                                const duration = (toDate.getTime() - fromDate.getTime()) / 1000; // in seconds
-                                const fees = Math.ceil(duration * 100); // 100 VND per second
-                                paidInput.value = fees;
-                            }
+                    // Calculate parking fees based on from and to dates
+                    const calculateFees = () => {
+                        const fromDate = new Date(fromInput.value);
+                        const toDate = new Date(toInput.value);
+                        const duration = (toDate.getTime() - fromDate.getTime()) / 1000; // in seconds
+                        const fees = Math.ceil(duration * 100); // 100 VND per second
+                        paidInput.value = fees;
+                    }
 
-                            fromInput.addEventListener("input", calculateFees);
-                            toInput.addEventListener("input", calculateFees);
-                        </script>
+                    fromInput.addEventListener("input", calculateFees);
+                    toInput.addEventListener("input", calculateFees);
+                    </script>
                     <label>Note: Parking Fees: 5000VND/hour</label>
                 </fieldset>
                 <footer>

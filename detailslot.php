@@ -44,6 +44,10 @@ if ($slot == 'ALL') {
 
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+<title>Detailed Parking Slot Information</title>
+
 <body>
     <section id="container">
         <?php
@@ -78,7 +82,8 @@ if ($slot == 'ALL') {
                         <label for="status">Filter by Status:</label>
                         <button type="submit" name="status" value="reserved"
                             style="background-color: green; ">Reserved</button>
-                        <button type="submit" name="status" value="inuse" style="background-color: red;">In Use</button>
+                        <button type="submit" name="status" value="inuse" style="background-color: #f16529;">In
+                            Use</button>
                     </form>
 
 
@@ -127,3 +132,5 @@ if ($slot == 'ALL') {
     </section>
 
 </body>
+
+</html>
