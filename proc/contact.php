@@ -8,11 +8,11 @@
 	$msg=$_POST['msg'];
 	$table_name='messages';
 	
-	date_default_timezone_set('Africa/Nairobi'); // CDT
-							$dt=date("m.d.y");
-							$format = "H:i";
-							$date = date($format, time());
-							$tt=$dt.' '.$date;
+	date_default_timezone_set('Asia/Ho_Chi_Minh'); // CDT
+	$dt=date("d.m.y");
+	$format = "H:i";
+	$date = date($format, time());
+	$tt=$dt.' '.$date;
 	
 	$form_data = array(
 	    'name' =>  $name,
