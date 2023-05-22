@@ -6,23 +6,12 @@ $slot = $_POST['slot'];
 $from = $_POST['from'];
 $to = $_POST['to'];
 $paynum = $_POST['paynum'];
+$paid = $_POST['paid'];
 
 session_start();
 $status = "RESERVED";
 $time_begin = strtotime($from);
 $time_end = strtotime($to);
-$diff = $time_end - $time_begin;
-$hours = round($diff / (60 * 60));
-if($hours<12) {
-    $cost = $hours * 5000;
-}elseif ($hours>=12 && $hours<48) {
-    $cost = 12 * 5000 + ($hours-12)*10000;
-} else {
-    $cost = 300000;
-}
-
-$formatted_cost = number_format($cost, 0, ',', ',');
-$charge = $formatted_cost . " VND";
 $phone = $_SESSION["phone"];
 $restime = substr( $from,  0, 10);
 
@@ -54,7 +43,7 @@ if ($booking_count >= 5 && $restime === $today) {
 }
 
 // Add the new reservation to the database
-$query = "INSERT INTO zones (phone, `status`, slot, plateno, paynum, charge, timebegin, timeend,pays) VALUES ('$phone','$status', '$slot', '$plateno', '$paynum', '$charge', '$from', '$to','paid')";
+$query = "INSERT INTO zones (phone, `status`, slot, plateno, paynum, charge, timebegin, timeend,pays) VALUES ('$phone','$status', '$slot', '$plateno', '$paynum', '$paid', '$from', '$to','paid')";
 $result = mysqli_query($connect, $query);
 
 if (!$result) {
@@ -64,7 +53,7 @@ if (!$result) {
     exit();
 }
 
-$sql = "INSERT INTO `reserved-list` ( restime, slot, plate, phone,charge) VALUES ('$restime','$slot', '$plateno', '$phone', '$charge')";
+$sql = "INSERT INTO `reserved-list` ( restime, slot, plate, phone,charge) VALUES ('$restime','$slot', '$plateno', '$phone', '$paid')";
 $rs = mysqli_query($connect, $sql);
 
 if(!$rs){
