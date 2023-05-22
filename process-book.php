@@ -38,6 +38,21 @@ while ($booking = mysqli_fetch_assoc($existing_bookings)) {
     }
         
 }
+
+// Kiểm tra số lần đặt chỗ 
+$today = date('Y-m-d');
+$booking_count_query = "SELECT COUNT(*) AS booking_count FROM zones WHERE phone='$phone' AND DATE(timebegin) = '$today'";
+$booking_count_result = mysqli_query($connect, $booking_count_query);
+$row = mysqli_fetch_assoc($booking_count_result);
+$booking_count = $row['booking_count'];
+
+// Kiểm tra số lần đặt chỗ đã vượt quá giới hạn
+if ($booking_count >= 5 && $restime === $today) {
+    $_SESSION['error'] = 'You have reached the maximum limit of 5 bookings per day. Please cancel a previous booking before making a new one.';
+    header('location:error-book.php');
+    exit();
+}
+
 // Add the new reservation to the database
 $query = "INSERT INTO zones (phone, `status`, slot, plateno, paynum, charge, timebegin, timeend,pays) VALUES ('$phone','$status', '$slot', '$plateno', '$paynum', '$charge', '$from', '$to','paid')";
 $result = mysqli_query($connect, $query);
@@ -61,4 +76,3 @@ if(!$rs){
 
 header('location:mybookings.php');
 exit();
-

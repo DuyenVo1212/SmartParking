@@ -47,6 +47,23 @@ if ($slot == 'ALL') {
 <!DOCTYPE html>
 <html lang="en">
 <title>Detailed Parking Slot Information</title>
+<style>
+.booking-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    float: right
+}
+
+.booking-btn:hover {
+    background-color: #0056b3;
+}
+</style>
 
 <body>
     <section id="container">
@@ -81,7 +98,7 @@ if ($slot == 'ALL') {
                     <form method="post" action="">
                         <label for="status">Filter by Status:</label>
                         <button type="submit" name="status" value="reserved"
-                            style="background-color: green; ">Reserved</button>
+                            style="background-color: green;">Reserved</button>
                         <button type="submit" name="status" value="inuse" style="background-color: #f16529;">In
                             Use</button>
                     </form>
@@ -104,7 +121,7 @@ if ($slot == 'ALL') {
                             </tr>
                         </thead>
                         <tbody>
-                            <?php while($row=mysqli_fetch_array($query)){ ?>
+                            <?php while ($row = mysqli_fetch_array($query)) { ?>
                             <tr>
                                 <td><?php echo $row['slot'] ?></td>
                                 <td><?php echo $row['timebegin'] ?></td>
@@ -117,12 +134,16 @@ if ($slot == 'ALL') {
                         </tbody>
                     </table>
                     <?php } ?>
+
                 </div>
 
                 <div class="links" style="width: 100%; overflow: hidden;">
                     <a href="zones.php" style="float: left;">Back</a>
+                    <?php if (!isset($_SESSION['phone'])) { ?>
+                    <button class="booking-btn" onclick="showLoginSignup()">Go to Booking Slot</button>
+                    <?php } else { ?>
                     <a href="booking.php" style="float: right;">Go to Booking Slot</a>
-
+                    <?php } ?>
                 </div>
             </div>
         </section>
@@ -130,6 +151,13 @@ if ($slot == 'ALL') {
 			include('inc/footer.php');
 	?>
     </section>
+
+    <script>
+    function showLoginSignup() {
+        alert("You need to log in or register an account to continue.");
+        window.location.href = "index.php"; // Chuyển hướng sang trang đăng nhập
+    }
+    </script>
 
 </body>
 
