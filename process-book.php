@@ -13,7 +13,7 @@ $status = "RESERVED";
 $time_begin = strtotime($from);
 $time_end = strtotime($to);
 $phone = $_SESSION["phone"];
-$restime = substr( $from,  0, 10);
+// $restime = substr( $from,  0, 10);
 
 // Check if the slot is available
 $existing_bookings = mysqli_query($connect, "SELECT * FROM zones WHERE slot='$slot' AND (status ='RESERVED' OR status ='INUSE')");
@@ -53,15 +53,15 @@ if (!$result) {
     exit();
 }
 
-$sql = "INSERT INTO `reserved-list` ( restime, slot, plate, phone,charge) VALUES ('$restime','$slot', '$plateno', '$phone', '$paid')";
-$rs = mysqli_query($connect, $sql);
+// $sql = "INSERT INTO `reserved-list` (slot, plate, phone,charge) VALUES ('$slot', '$plateno', '$phone', '$paid')";
+// $rs = mysqli_query($connect, $sql);
 
-if(!$rs){
-    // Insert failed, display error message
-    $_SESSION['error'] = 'error insert reslist: '. mysqli_error($connect);
-    header('location:error-book.php');
-    exit();
-}
+// if(!$rs){
+//     // Insert failed, display error message
+//     $_SESSION['error'] = 'error insert reslist: '. mysqli_error($connect);
+//     header('location:error-book.php');
+//     exit();
+// }
 
 header('location:mybookings.php');
 exit();

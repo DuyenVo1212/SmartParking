@@ -87,7 +87,6 @@
 						echo '<table class="tb-mbk animated fadeIn">';
 						echo '<thead>';
 						echo '<tr>';
-						echo '<th>ID</th>';
 						echo '<th>Slot</th>';
 						echo '<th>Status</th>';
 						echo '<th>Time Begin</th>';
@@ -98,7 +97,6 @@
 						echo '<tbody>';
 						while($row = $result->fetch_assoc()) {
 							echo "<tr>";
-							echo "<td>".$row["id"]."</td>";
 							echo "<td>".$row["slot"]."</td>";
 							echo "<td>".$row["status"]."</td>";
 							echo "<td>".$row["timebegin"]."</td>";

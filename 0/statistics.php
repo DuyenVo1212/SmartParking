@@ -12,7 +12,7 @@
 		$year = $current_year;
 	}
 	$txtsearch = $year .'-'. $month . '%';
-	$query = "SELECT * FROM `reserved-list` WHERE restime LIKE '{$txtsearch}%'";
+	$query = "SELECT * FROM `reserved-list` WHERE timein LIKE '{$txtsearch}%'";
 	$result = mysqli_query($connect, $query);
 	$total = mysqli_affected_rows($connect);
 ?>
@@ -64,11 +64,13 @@
                         id="example">
                         <thead>
                             <tr>
-                                <th style="width:120px;">Booking Date</th>
+                                <th style="width:120px;">Time In</th>
+                                <th style="width:120px;">Time Out</th>
                                 <th style="width:90px;">Slot</th>
                                 <th style="width:90px;">Plate</th>
                                 <th style="width:90px;">Phone</th>
-                                <th>Charge</th>
+                                <th style="width:90px;">Charge</th>
+                                <th>Reserved</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -77,11 +79,13 @@
 								$id=$row['id'];
 							?>
                             <tr>
-                                <td><?php echo $row['restime'] ?></td>
+                                <td><?php echo $row['timein'] ?></td>
+                                <td><?php echo $row['timeout'] ?></td>
                                 <td><?php echo $row['slot'] ?></td>
                                 <td><?php echo $row['plate'] ?></td>
                                 <td><?php echo $row['phone'] ?></td>
                                 <td><?php echo $row['charge'] ?></td>
+                                <td><?php echo $row['reserved'] ?></td>
                             </tr>
                             <?php } ?>
                         </tbody>

@@ -17,12 +17,12 @@ from mysql.connector import Error
 # import mymodule
 
 
-#kết nối database
-db=mysql.connector.connect(
-   host="localhost",
-   user="admin",
-   password="123",
-   database="cpms"
+# kết nối database
+db = mysql.connector.connect(
+    host="localhost",
+    user="admin",
+    password="123",
+    database="cpms"
 )
 
 # Base = declarative_base()
@@ -36,7 +36,8 @@ db=mysql.connector.connect(
 
 # khởi tạo con trỏ
 cursor = db.cursor()
-ser = serial.Serial('/dev/ttyACM0', 9600,timeout = 1) # kết nối với cổng Serial của Arduino
+# kết nối với cổng Serial của Arduino
+ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
 ser.reset_input_buffer()
 
 # 2_TẠO GIAO DIỆN
@@ -56,6 +57,7 @@ lmain.grid(column=0, row=0)
 
 # 3_ĐỌC CAMERA VÀ TIẾN HÀNH NHẬN DẠNG
 cap = cv2.VideoCapture(0)
+
 
 def webcam():
     ret, frames = cap.read()
@@ -116,58 +118,64 @@ def webcam():
     print("kỹ tự nhận dạng được: ", text)
     pattern = r'([0-9]{2}[A-Z]{1})([0-9]{5})'
     pattern1 = r'^([0-9]{2}[A-Z]{1}([0-9]{6}))$'
-    rsregex = re.match(pattern,text)
-    rsregex1 = re.match(pattern1,text)
+    rsregex = re.match(pattern, text)
+    rsregex1 = re.match(pattern1, text)
     if (rsregex and len(text) == 8) or (rsregex1 and len(text) == 9):
-        bsx = text 
+        bsx = text
         print("biển số xe: ", bsx)
-        timeout =datetime.now()
+        now = datetime.now()
+        timeout = now
         timein = None
-        #lấy thời điểm xe ra
-        # timeout = now.strftime("%Y-%m-%d %H:%M:%S")
         sel = "SELECT timein,pays FROM zones WHERE plateno = %s and status = 'INUSE' AND timein <= NOW()"
         val = (bsx,)
-        cursor.execute(sel,val)
+        cursor.execute(sel, val)
         rs = cursor.fetchall()
-        for x in rs :
+        for x in rs:
             timein = x[0]
             pays = x[1]
-            # timein = timein.strftime("%Y-%m-%d %H:%M:%S")
 #         now = datetime.datetime.now()# thời gian hiện tại
-        if timein is not None: # check if timein is not None
-            timeused = (timeout - timein).total_seconds() # thời gian sử dụng tính bằng giây
-            price = timeused * 100 # số tiền cần thanh toán
-            charge = '{:,.0f} VND'.format(price) # định dạng kết quả theo chuỗi '1000 VND'
+        if timein is not None:  # check if timein is not None
+            # thời gian sử dụng tính bằng giây
+            timeused = (timeout - timein).total_seconds()
+            price = timeused * 100  # số tiền cần thanh toán
+            # định dạng kết quả theo chuỗi '1000 VND'
+            charge = '{:,.0f} VND'.format(price)
+
+        # timein = timein.strftime("%Y-%m-%d %H:%M:%S")
+        # lấy thời điểm xe ra
+        # timeout = now.strftime("%Y-%m-%d %H:%M:%S")
         if rs:
-            if(pays=='paid'):
+            if (pays == 'paid'):
                 sql = "DELETE FROM zones WHERE plateno = %s"
                 val = (bsx,)
-                cursor.execute(sql,val)
+                cursor.execute(sql, val)
                 db.commit()
-                sql = "UPDATE `reserved-list` SET charge = %s, stats = %s WHERE plate = %s and stats = %s"
-                val = (charge,0,bsx,1)
-                cursor.execute(sql,val)
+                sql = "UPDATE `reserved-list` SET charge = %s, stats = %s, timeout = %s WHERE plate = %s and stats = %s"
+                val = (charge, 0, timeout, bsx, 1)
+                cursor.execute(sql, val)
                 rs = cursor.fetchall()
                 db.commit()
                 print("xóa thành công "+bsx+" khỏi bảng zones")
                 print("update thành công bảng reserved-list")
+                ser.write(b"open\n")
+                print('đã gửi thành công')
             else:
                 # Lắng nghe sự kiện thay đổi trên bảng zones
                 # @event.listens_for(Zones, 'after_update')
                 sel = "SELECT id FROM zones WHERE plateno = %s and status = 'INUSE' and pays = 'paid'"
                 val = (bsx,)
-                cursor.execute(sel,val)
+                cursor.execute(sel, val)
                 rs = cursor.fetchall()
                 if rs:
                     print("vui lòng ra khỏi bãi đỗ xe!")
-                else :
+                else:
                     print(bsx + " chưa thanh toán thanh toán")
                 # db.reconnect()
                 # cap.release()
                 # cap2 = cv2.VideoCapture(0)
-        else :
-            print("Không tìm thấy biển số "+ bsx)
-    
+        else:
+            print("Không tìm thấy biển số " + bsx)
+
     cut_vid1 = vid1[20: 500, 0: 700]
     # Chuyển màu video trong giao diện thành RGB
     vid1 = cv2.cvtColor(cut_vid1, cv2.COLOR_BGR2RGB)
@@ -178,7 +186,8 @@ def webcam():
     lmain.imgtk = imgtk
     lmain.configure(image=imgtk)
     lmain.after(20, webcam)
-#     importlib.reload(mymodule) 
+#     importlib.reload(mymodule)
+
 
 webcam()
 # @event.listens_for(zones, 'after_insert')

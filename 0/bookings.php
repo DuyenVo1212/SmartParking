@@ -29,6 +29,7 @@
                         <thead>
 
                             <tr>
+                                <th></th>
                                 <th>Slot</th>
                                 <th style="width:90px;">Plate No</th>
                                 <th style="width:90px;">Time Begin</th>

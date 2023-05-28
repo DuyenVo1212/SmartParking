@@ -9,12 +9,12 @@ import datetime
 import serial
 import mysql.connector
 from mysql.connector import Error
-#kết nối database
-db=mysql.connector.connect(
-   host="localhost",
-   user="admin",
-   password="123",
-   database="cpms"
+# kết nối database
+db = mysql.connector.connect(
+    host="localhost",
+    user="admin",
+    password="123",
+    database="cpms"
 )
 # khởi tạo con trỏ
 cursor = db.cursor()
@@ -26,7 +26,8 @@ root.title("Nhan Dang Bien So Xe")
 root.configure(bg='black')  # Nền đen
 
 
-ser = serial.Serial('/dev/ttyACM0', 9600,timeout = 1) # kết nối với cổng Serial của Arduino
+# kết nối với cổng Serial của Arduino
+ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
 ser.reset_input_buffer()
 
 # Chèn video
@@ -89,7 +90,7 @@ def webcam():
     bsx = pytesseract.image_to_string(invert, config='--psm 11')
     bsx = bsx.strip()
     print("kỹ tự nhận dạng được: ", bsx)
-    #khơi tạo regex cho biển số xe
+    # khơi tạo regex cho biển số xe
     new_arr = []
     for char in bsx:
         if (char.isalnum() == True):
@@ -97,7 +98,7 @@ def webcam():
 
     bsxend = ''.join(new_arr)
     print(len(bsxend))
-    #tạo regex kiểm tra kĩ tự lấy được từ ảnh
+    # tạo regex kiểm tra kĩ tự lấy được từ ảnh
     pattern = r'([0-9]{2}[A-Z]{1})([0-9]{5})'
     pattern1 = r'^([0-9]{2}[A-Z]{1}([0-9]{6}))$'
     rs = re.match(pattern, bsxend)
@@ -105,79 +106,90 @@ def webcam():
     if (rs and len(bsxend) == 8) or (rs1 and len(bsxend) == 9):
         print("kỹ tự nhận dạng được: ", bsxend)
         now = datetime.datetime.now()
-        #lấy thời điểm xe vào
+        # lấy thời điểm xe vào
         timein = now.strftime("%Y-%m-%d %H:%M:%S")
-        #kiểm tra biển số đã đặt trước chưa
+        # kiểm tra biển số đã đặt trước chưa
         sql = "SELECT * FROM zones WHERE plateno = %s and status = 'RESERVED' and timebegin <= %s"
-        adr = (bsxend,timein )
+        adr = (bsxend, timein)
         cursor.execute(sql, adr)
         isbsx = cursor.fetchall()
         for x in isbsx:
-            #lấy biển số
+            # lấy biển số
             plateno = x[2]
+            slot = x[0]
+            phone = x[8]
+            charge = x[6]
         row = cursor.rowcount
-        print("số hàng dữ liệu lấy được là ",row)
-        if(row > 0):
+        print("số hàng dữ liệu lấy được là ", row)
+        if (row > 0):
             print("biển số xe là: ", plateno)
-            #update lại trạng thái và thêm thời gian vào
+            # update lại trạng thái và thêm thời gian vào
             sql = "UPDATE zones SET status = 'INUSE',timein = %s  where plateno = %s"
-            val = (timein,plateno,)
-            cursor.execute(sql,val)
+            val = (timein, plateno,)
+            cursor.execute(sql, val)
             db.commit()
             if cursor.rowcount > 0:
-                print('update thành công! '+ plateno)
+                print('update thành công! ' + plateno)
+            # insert vào reserved-list
+            query = "INSERT INTO `reserved-list` (slot, plate, phone, charge, timein, reserved) VALUES (%s,%s,%s,%s,%s,'yes')"
+            value = (slot, plateno, phone, charge, timein)
+            cursor.execute(query, value)
+            db.commit()
+            if cursor.rowcount > 0:
+                print('update thành công! ' + plateno)
                 print('mời xe vào!')
-                #gửi yêu cầu mở cổng
+                # gửi yêu cầu mở cổng
                 ser.write(b"open\n")
                 print('đã gửi thành công')
-        else :
-            #lấy thời gian vào
+        else:
+            # lấy thời gian vào
             now = datetime.datetime.now()
             timein = now.strftime("%Y-%m-%d %H:%M:%S")
-            #tạo thời gian ra ảo
-            future = now + datetime.timedelta(hours=5)
-            timeout = future.strftime("%Y-%m-%d %H:%M:%S")
-            #lấy số slot còn trống ở hiện tại
-            query =  "SELECT slot FROM zones WHERE (status='RESERVED' or status = 'INUSE') AND (timebegin <= NOW() or timein <= NOW())"
+            # tạo thời gian ra ảo
+            # future = now + datetime.timedelta(hours=5)
+            # timeout = future.strftime("%Y-%m-%d %H:%M:%S")
+            # lấy số slot còn trống ở hiện tại
+            query = "SELECT slot FROM zones WHERE (status='RESERVED' or status = 'INUSE') AND (timebegin <= NOW() or timein <= NOW())"
             cursor.execute(query)
             getslot = cursor.fetchall()
             rows = cursor.rowcount
             emptyslotcount = 3-rows
             print("so slot còn trống là: ", emptyslotcount)
-            if emptyslotcount > 0 :
+            if emptyslotcount > 0:
                 dtbslots = [r[0] for r in getslot]
-                slots = ['A1','A2','A3']
+                slots = ['A1', 'A2', 'A3']
                 # Lấy các phần tử không trùng nhau giữa hai mảng
                 emptyslot = list(set(slots).difference(set(dtbslots)))
-                print('slot danh cho ban la: ',emptyslot[0])
-                #kiểm tra biển số đã được đã tồn tại và có trạng thái là inuse chưa
+                print('slot danh cho ban la: ', emptyslot[0])
+                # kiểm tra biển số đã được đã tồn tại và có trạng thái là inuse chưa
                 sql = "SELECT * FROM zones WHERE plateno = %s and status = 'INUSE' and (timebegin <= NOW() or timein <= NOW())"
                 adr = (bsxend,)
                 cursor.execute(sql, adr)
                 inusebsx = cursor.fetchall()
-                if(inusebsx):
+                if (inusebsx):
                     print('biển số xe '+bsxend+' đã có nên không thêm nữa!')
-                else :   
+                else:
                     querry = "INSERT INTO zones (slot,status,plateno,paynum, charge, phone, timein) VALUES (%s,%s,%s,%s,%s,%s,%s)"
-                    val = (emptyslot[0],"INUSE",bsxend,'','','',timein,)
-                    cursor.execute(querry,val)
-                    myresult = cursor.fetchall()
-                    inserted = db.commit()
-                    rs1 = cursor.rowcount > 0 
-                    restime = timein[:10]
-                    sql = "INSERT INTO `reserved-list` ( restime, slot, plate, phone,charge) VALUES (%s,%s,%s,%s,%s)"
-                    val = (restime,emptyslot[0],bsxend,'','',)
-                    cursor.execute(sql,val)
-                    myresult = cursor.fetchall()
+                    val = (emptyslot[0], "INUSE", bsxend, '', '', '', timein,)
+                    cursor.execute(querry, val)
+                    cursor.fetchall()
                     db.commit()
-                    rs2 = cursor.rowcount > 0 
+                    rs1 = cursor.rowcount > 0
+                    # restime = timein[:10]
+                    sql = "INSERT INTO `reserved-list` (slot, plate, phone, charge, timein, reserved) VALUES (%s,%s,%s,%s,%s,%s)"
+                    val = (emptyslot[0], bsxend, '', '', timein, 'no')
+                    cursor.execute(sql, val)
+                    cursor.fetchall()
+                    db.commit()
+                    rs2 = cursor.rowcount > 0
                     if rs1 and rs2:
-                        print("biển số xe "+bsxend+" đã được thêm vào thành công! ")
+                        print("biển số xe "+bsxend +
+                              " đã được thêm vào thành công! ")
                         ser.write(b"open\n")
                         print('đã gửi thành công')
-                    else :
+                    else:
                         print("lỗi thêm vào database!")
-            else :
+            else:
                 print('Hết chỗ trống!')
 
     cut_vid1 = vid1[20: 500, 0: 700]
@@ -190,6 +202,7 @@ def webcam():
     lmain.imgtk = imgtk
     lmain.configure(image=imgtk)
     lmain.after(20, webcam)
+
 
 webcam()
 
