@@ -35,7 +35,6 @@
                                 <th style="width:90px;">Time Begin</th>
                                 <th style="width:90px;">Time End</th>
                                 <th style="width:90px;">Time In</th>
-                                <th style="width:90px;">Time Out</th>
                                 <th style="width:80px;">Status</th>
                                 <th style="width:80px;">Payment Status</th>
 
@@ -58,7 +57,6 @@
                                 <td><?php echo $row['timebegin'] ?></td>
                                 <td><?php echo $row['timeend'] ?></td>
                                 <td><?php echo $row['timein'] ?></td>
-                                <td><?php echo $row['timeout'] ?></td>
                                 <td><?php echo $row['status'] ?></td>
                                 <td>
                                     <?php
