@@ -1,6 +1,7 @@
 
 SMART PARKING RESERVATION SYSTEM
-This project is a Smart Parking Reservation System that aims to provide efficient parking management and reservation services. It utilizes various technologies and functionalities to improve the parking experience for users.
+This project is a Smart Parking Reservation System that aims to provide efficient parking management and reservation services. 
+It utilizes various technologies and functionalities to improve the parking experience for users.
 
 TECHNOLOGIES USED
 Frontend: HTML, CSS, JavaScript
