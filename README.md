@@ -25,6 +25,7 @@ To set up and run the Smart Parking Reservation System, follow the instructions 
   Admin panel.
   
 #WEBSITE PREVIEW
+
 Admin:
 * Manage Bookings: Admins control parking reservations. <img src="./img/manage_booking.png"/>
 * Manage Users: Admins oversee user accounts. <img src="./img/manage_user.png"/>
