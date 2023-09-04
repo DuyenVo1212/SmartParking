@@ -27,16 +27,24 @@ To set up and run the Smart Parking Reservation System, follow the instructions 
 #WEBSITE PREVIEW
 
 Admin:
-* Manage Bookings: Admins control parking reservations. <img src="./img/manage_booking.png"/>
-* Manage Users: Admins oversee user accounts. <img src="./img/manage_user.png"/>
-* Statistics: Admins access usage data. <img src="./img/satistics.png"/>
-* Message Users: Admins communicate with users. <img src="./img/message.png"/>
+* Manage Bookings: Admins control parking reservations.
+* <img src="./img/manage_booking.png"/>
+* Manage Users: Admins oversee user accounts.
+* <img src="./img/manage_user.png"/>
+* Statistics: Admins access usage data.
+* <img src="./img/satistics.png"/>
+* Message Users: Admins communicate with users.
+* <img src="./img/message.png"/>
 
 User:
-* Homepage: Users explore parking options. <img src="./img/homepage.png"/>
-* Detail Booking: Users check reservation details. <img src="./img/detail.png"/>
-* Booking Form: Users make parking reservations. <img src="./img/form_booking.png"/>
-* Parking Zones: Users choose parking areas. <img src="./img/parking zone.png"/>
+* Homepage: Users explore parking options.
+* <img src="./img/homepage.png"/>
+* Detail Booking: Users check reservation details.
+* <img src="./img/detail.png"/>
+* Booking Form: Users make parking reservations.
+* <img src="./img/form_booking.png"/>
+* Parking Zones: Users choose parking areas.
+* <img src="./img/parking zone.png"/>
 
 #CONTRIBUTION
 * Contributions to the Smart Parking Reservation System are welcome. If you find any issues or have suggestions for improvement, please feel free to submit a pull request.
